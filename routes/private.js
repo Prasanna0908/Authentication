@@ -5,4 +5,6 @@ const {protect} = require('../middleware/Auth.middleware')
 
 router.route("/").get(protect, getPrivateData)
 
+
+
 module.exports = router
