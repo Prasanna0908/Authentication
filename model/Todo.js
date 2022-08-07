@@ -4,13 +4,17 @@
 const mongoose = require('mongoose')
 
 const TodoSchema = new mongoose.Schema({
-    name:{
-        type: String,
-        
-    },
-    isDone:{
-        type: Boolean,
-        default: false
+    roll_no : 
+    {
+        type:String,
+        name:{
+            type: String,
+            
+        },
+        isDone:{
+            type: Boolean,
+            default: false
+        }
     }
 })
 

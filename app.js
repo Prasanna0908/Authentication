@@ -28,6 +28,7 @@ app.get('/' , (req, res) => {
 app.use('/' , require('./routes/Auth'))
 app.use('/dashboard' , require('./routes/private'))
 app.use('/todo' , require('./routes/index'))
+app.use('/student' , require('./routes/student'))
 
 
 //Error Handlers

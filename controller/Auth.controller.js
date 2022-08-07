@@ -21,6 +21,11 @@ const login = async (req, res, next) => {
     }
     try{
         const user = await User.findOne({email}).select("+password")
+        console.log(new Date())
+        console.log(user.createdAt)
+        if(new Date() > user.createdAt){
+          return next(new ErrorResponse("Password Expired ! Please Reset your Password", 401))
+      }
         if(!user){
             return next(new ErrorResponse("Email not registered!", 401))
         }
@@ -48,14 +53,14 @@ const forgotPassword = async (req, res, next) => {
   
     try {
       const user = await User.findOne({ email });
-  
+      console.log(user.createdAt)
       if (!user) {
         return next(new ErrorResponse("No email could not be sent", 404));
       }
   
       // Reset Token Gen and add to database hashed (private) version of token
       const resetToken = user.getResetPasswordToken();
-  
+      user.createdAt = Date.now() + 180*1000;
       await user.save();
   
       // Create reset url to email to provided email

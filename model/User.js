@@ -23,6 +23,10 @@ const UserSchema = new mongoose.Schema({
     minlength: 6,
     select: false,
   },
+  createdAt: {
+    type: Date,
+    default:+new Date() + 300*1000// Thirty Days
+  },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
@@ -42,8 +46,8 @@ UserSchema.methods.matchPassword = async function (password) {
 };
 
 UserSchema.methods.getSignedToken = function () {
-  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRE,
+  return jwt.sign({ id: this._id }, 'jllgshllWEUJHGHYJkjsfjds90', {
+    expiresIn: 5,
   });
 };
 
